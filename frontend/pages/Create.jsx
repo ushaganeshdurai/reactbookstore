@@ -15,7 +15,7 @@ const Create = () => {
       title,author,publishedYear
     };setLoading(true)
     //to access books use post
-    axios.post('https://reactbookstore-omega.vercel.app/books',data).then(()=>{
+    axios.post('https://reactbookstore-frontend.vercel.app/books',data).then(()=>{
       setLoading(false);
       navigate('/')
     }).catch((error)=>{
