@@ -7,13 +7,13 @@ import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
 app.use(express.json()); //middleware for parsing req body
 //option 1: allow all origins with default of cors(*) 24:33
-app.use(cors());
+// app.use(cors());
 //option 2: custom origins;
-//  app.use(cors({
-//    origin:'https://reactbookstore-omega.vercel.app/',
-//    allowedHeaders:['Content-Type'],
-//    methods:['GET','POST','PUT','DELETE']
-//  }))
+ app.use(cors({
+   origin:'https://reactbookstore-frontend.vercel.app/',
+   allowedHeaders:['Content-Type'],
+   methods:['GET','POST','PUT','DELETE']
+ }))
 app.get("/", (req, res) => {
   //general url
   console.log(req);
