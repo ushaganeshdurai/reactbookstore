@@ -3,7 +3,7 @@ const app = express();
 import cors from "cors";
 const port = 5555;
 import mongoose from "mongoose";
-import { Book } from "./models/bookModel.js";
+// import { Book } from "./models/bookModel.js";
 import booksRoute from "./routes/booksRoute.js";
 app.use(express.json()); //middleware for parsing req body
 //option 1: allow all origins with default of cors(*) 24:33
@@ -24,7 +24,7 @@ app.use("/books", booksRoute);
 //route to save a book
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/fccbook")
+  .connect("mongodb+srv://admin-usha:Test123@cluster0.2ugnfyc.mongodb.net/fccbook")
   .then(() => {
     console.log("connected to db");
     app.listen(port, () => {

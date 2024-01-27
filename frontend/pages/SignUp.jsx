@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
-  GoogleAuthProvider,
+  // GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  signInWithPopup,
+  // signInWithPopup,
 } from "firebase/auth";
 
 import { auth } from "../src/auth";
@@ -18,7 +18,7 @@ const SignUp = () => {
   const [error,setError] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const provider = new GoogleAuthProvider();
+  // const provider = new GoogleAuthProvider();
   const handleSignup = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
@@ -31,16 +31,16 @@ const SignUp = () => {
         console.log(error);
       });
   };
-  const handleGooglesignup = () => {
-    signInWithPopup(auth, provider)
-      .then(() => {
-        navigate("/home");
-      })
-      .then((error) => {
-        console.log(error);
-        navigate("/");
-      });
-  };
+  // const handleGooglesignup = () => {
+  //   signInWithPopup(auth, provider)
+  //     .then(() => {
+  //       navigate("/home");
+  //     })
+  //     .then((error) => {
+  //       console.log(error);
+  //       navigate("/");
+  //     });
+  // };
 
   return (
     
@@ -71,19 +71,19 @@ const SignUp = () => {
               Login here
             </a>
           </p>
-          <button className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2">
+          {/* <button className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2">
             <img
               className="mr-2 h-5"
               onChange={handleGooglesignup}
               src="https://static.cdnlogo.com/logos/g/35/google-icon.svg"
             />{" "}
             Get started with Google
-          </button>
-          <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
+          </button> */}
+          {/* <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
             <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-white px-4 text-center text-sm text-gray-500">
               Or use email instead
             </div>
-          </div>
+          </div> */}
           <form
             onSubmit={handleSignup}
             className="flex flex-col items-stretch pt-3 md:pt-8"

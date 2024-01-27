@@ -19,16 +19,16 @@ const SignIn = () => {
       });
   };
 
-  const handleGooglelogin = (e) => {
-    e.preventDefault();
-    signInWithPopup(auth, provider)
-      .then((userCredential) => {
-        navigate("/home");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const handleGooglelogin = (e) => {
+  //   e.preventDefault();
+  //   signInWithPopup(auth, provider)
+  //     .then((userCredential) => {
+  //       navigate("/home");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   return (
     <div className="flex flex-wrap">
       <div className="flex w-full flex-col md:w-1/2">
@@ -45,7 +45,7 @@ const SignIn = () => {
           <p className="mt-2 text-left text-gray-500">
             Welcome back, please enter your details.
           </p>
-          <button
+          {/* <button
             onChange={handleGooglelogin}
             className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition focus:ring-2 hover:border-transparent hover:bg-black hover:text-white"
           >
@@ -54,7 +54,7 @@ const SignIn = () => {
               src="https://static.cdnlogo.com/logos/g/35/google-icon.svg"
             />{" "}
             Log in with Google
-          </button>
+          </button> */}
           <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
             <div className="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-white text-center text-sm text-gray-500">
               or
@@ -97,7 +97,7 @@ const SignIn = () => {
             <p className="whitespace-nowrap text-gray-600">
               Don't have an account?
               <a
-                href="#"
+                 onClick={() => navigate("/signUp")}
                 className="underline-offset-4 font-semibold text-gray-900 underline"
               >
                 Sign up for free.
