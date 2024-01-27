@@ -43,8 +43,8 @@ const Home = () => {
                 Author
               </th>
               <th className="border border-slate-700 rounded-md">Author</th>
-              <th className="border border-slate-700 rounded-md">Published Year</th>
-              <th className="border border-slate-700 rounded-md max-md:hidden">
+              <th className="border border-slate-700 rounded-md max-md:hidden">Published Year</th>
+              <th className="border border-slate-700 ">
                 Operations
               </th>
             </tr>

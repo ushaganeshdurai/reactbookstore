@@ -21,7 +21,7 @@ const Show = () => {
         console.log(error);
         setLoading(false);
       });
-  });
+  },[]);
 
   return (
     <div className="p-4">
@@ -55,7 +55,7 @@ const Show = () => {
             <span className="text-xl mr-4 text-gray-600">
               Last Updated time
             </span>
-            <span>{new Date(book.UpdatedAt).toString()}</span>
+            <span>{new Date(book.updatedAt).toString()}</span>
           </div>
         </div>
       )}
