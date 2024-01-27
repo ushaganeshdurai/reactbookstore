@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/books')
+      .get('https://reactbookstore-omega.vercel.app/books')
       .then((response) => { 
         setBooks(response.data.data);
         setLoading(false);

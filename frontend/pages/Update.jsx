@@ -16,7 +16,7 @@ const Update = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books${id}`)
+      .get(`https://reactbookstore-omega.vercel.app/books${id}`)
       .then((response) => {
         setAuthor(response.data.author);
         setTitle(response.data.title);
