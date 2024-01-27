@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 
-import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyC2eQsbD7dmrceB_WEV0X0uIxAPOmOceZY",
   authDomain: "react-book-store-ca69f.firebaseapp.com",
@@ -12,4 +12,7 @@ const firebaseConfig = {
   measurementId: "G-J6TR1QC3HL",
 };
 const app = initializeApp(firebaseConfig);
+export const provider = new GoogleAuthProvider();
 export const auth = getAuth(app);
+
+

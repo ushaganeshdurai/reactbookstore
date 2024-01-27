@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+
 import { auth } from "../src/auth";
 import { useNavigate } from "react-router-dom";
+const Alert = ({ color, withBorderAccent, children }) => (
+  <div className={`alert ${color} ${withBorderAccent ? 'border-accent' : ''}`}>
+    {children}
+  </div>
+);
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [error,setError] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const provider = new GoogleAuthProvider();
   const handleSignup = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
@@ -15,11 +27,23 @@ const SignUp = () => {
         console.log(userCredential);
       })
       .catch((error) => {
+        setError(error.message);
         console.log(error);
+      });
+  };
+  const handleGooglesignup = () => {
+    signInWithPopup(auth, provider)
+      .then(() => {
+        navigate("/home");
+      })
+      .then((error) => {
+        console.log(error);
+        navigate("/");
       });
   };
 
   return (
+    
     <div className="flex w-screen flex-wrap text-slate-800">
       <div className="relative hidden h-screen select-none flex-col justify-center bg-blue-600 text-center md:flex md:w-1/2">
         <img
@@ -41,7 +65,8 @@ const SignUp = () => {
           <p className="mt-6 text-center font-medium md:text-left">
             Already using Book store?&nbsp;
             <a
-              className="whitespace-nowrap font-semibold text-blue-700 cursor-pointer"  onClick={() => navigate("/signIn")}
+              className="whitespace-nowrap font-semibold text-blue-700 cursor-pointer"
+              onClick={() => navigate("/signIn")}
             >
               Login here
             </a>
@@ -49,6 +74,7 @@ const SignUp = () => {
           <button className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2">
             <img
               className="mr-2 h-5"
+              onChange={handleGooglesignup}
               src="https://static.cdnlogo.com/logos/g/35/google-icon.svg"
             />{" "}
             Get started with Google
@@ -116,7 +142,17 @@ const SignUp = () => {
             >
               Sign Up
             </button>
-          </form>
+          </form> 
+          {error && (
+        <Alert color="info" withBorderAccent>
+          <span>
+            <span className="font-medium">Info alert!</span> {error}
+          </span>
+        </Alert>,
+        <Alert  color="info">
+      Change a few things up and try submitting again.
+    </Alert>
+      )}
         </div>
       </div>
     </div>
