@@ -26,7 +26,7 @@ const Create = () => {
 
   return(
     <div className="p-4">
-      <Backbutton/>
+      <Backbutton />
       <h1 className="text-3xl">Create a book</h1>
       {loading?<Spinner/>:' '}
       <div className="flex flex-col rounded-md border-2 border-sky-400 p-4 mx-auto w-[600]">
