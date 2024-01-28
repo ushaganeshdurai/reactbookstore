@@ -1,6 +1,7 @@
 import express from "express";
 const app = express();
 import cors from "cors";
+import {} from 'dotenv/config'
 const port = 5555;
 import mongoose from "mongoose";
 // import { Book } from "./models/bookModel.js";
@@ -10,7 +11,7 @@ app.use(express.json()); //middleware for parsing req body
 // app.use(cors());
 //option 2: custom origins;
  app.use(cors({
-   origin:'https://reactbookstore-frontend.vercel.app/',
+   origin:'https://reactbookstore-backend.vercel.app/',
    allowedHeaders:['Content-Type'],
    methods:['GET','POST','PUT','DELETE']
  }))
@@ -24,7 +25,7 @@ app.use("/books", booksRoute);
 //route to save a book
 
 mongoose
-  .connect("mongodb+srv://admin-usha:Test123@cluster0.2ugnfyc.mongodb.net/fccbook")
+  .connect(process.env.MONGOD_URL)
   .then(() => {
     console.log("connected to db");
     app.listen(port, () => {

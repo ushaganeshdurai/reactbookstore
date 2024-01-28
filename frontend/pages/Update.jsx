@@ -16,7 +16,7 @@ const Update = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://reactbookstore-frontend.vercel.app/books${id}`)
+      .get(`https://reactbookstore-backend.vercel.app/books${id}`)
       .then((response) => {
         setAuthor(response.data.author);
         setTitle(response.data.title);
