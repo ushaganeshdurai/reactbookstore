@@ -11,7 +11,7 @@ app.use(express.json()); //middleware for parsing req body
 // app.use(cors());
 //option 2: custom origins;
  app.use(cors({
-   origin:'https://reactbookstore-backend.vercel.app/',
+   origin:'https://reactbookstore-frontend.vercel.app/',
    allowedHeaders:['Content-Type'],
    methods:['GET','POST','PUT','DELETE']
  }))
