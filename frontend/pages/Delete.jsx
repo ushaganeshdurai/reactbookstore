@@ -14,7 +14,7 @@ const Delete = () => {
       .delete(`https://reactbookstore-backend.vercel.app/books/${id}`)
       .then(() => {
         setloading(false);
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
         setloading(fasle);

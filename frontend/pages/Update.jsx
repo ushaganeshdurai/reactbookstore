@@ -41,7 +41,7 @@ const Update = () => {
       .put(`http://localhost:5555/books/${id}`, data)
       .then(() => {
         setLoading(true);
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);

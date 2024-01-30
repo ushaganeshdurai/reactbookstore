@@ -17,7 +17,7 @@ const Create = () => {
     //to access books use post
     axios.post('https://reactbookstore-backend.vercel.app/books',data).then(()=>{
       setLoading(false);
-      navigate('/')
+      navigate('/home')
     }).catch((error)=>{
       console.log(error)
       setLoading(false)
