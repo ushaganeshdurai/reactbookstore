@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {"version":2,
 "builds":[
 {"src":"index.js","use":"@vercel/node"}
@@ -8,3 +9,24 @@
         "dest":"/"
     }
 ]}
+=======
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/",
+        "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
+      }
+    ]
+  }
+>>>>>>> 878017e663fb4d168556a793c5b094e2d401e20f
