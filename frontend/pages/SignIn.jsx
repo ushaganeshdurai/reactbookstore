@@ -55,11 +55,7 @@ const SignIn = () => {
             />{" "}
             Log in with Google
           </button> */}
-          <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
-            <div className="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-white text-center text-sm text-gray-500">
-              or
-            </div>
-          </div>
+          
           <form onSubmit={handleLogin} className="flex flex-col pt-3 md:pt-8">
             <div className="flex flex-col pt-4">
               <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
