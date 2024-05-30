@@ -4,6 +4,10 @@ import cors from "cors";
 import {} from 'dotenv/config'
 const port = 5555;
 import mongoose from "mongoose";
+
+
+
+
 // import { Book } from "./models/bookModel.js";
 import booksRoute from "./routes/booksRoute.js";
 app.use(express.json()); //middleware for parsing req body
@@ -15,6 +19,8 @@ app.use(cors());
 //    allowedHeaders:['Content-Type'],
 //    methods:['GET','POST','PUT','DELETE']
 //  }))
+
+app.use(express.urlencoded());
 app.get("/", (req, res) => {
   //general url
   console.log(req);
