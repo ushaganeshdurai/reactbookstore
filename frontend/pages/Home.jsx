@@ -65,8 +65,7 @@ const Home = () => {
               {books.map((book, index) => (
                 <tr key={book._id}>
                   <td className=" rounded-md text-center">{book.title}
-                  {book.coverImageUrl}
-                  <img src={book.coverImageUrl} alt="" />
+                  <img src={book.coverImageUrl.toString()} alt="" />
                   </td>
                   <td className=" rounded-md text-center max-md:hidden">{book.author}</td>
                   <td className=" rounded-md text-center max-md:hidden">{book.publishedYear}</td>
