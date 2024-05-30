@@ -2,26 +2,32 @@ import express from "express";
 const app = express.Router();
 import { Book } from "../models/bookModel.js";
 
+// Route to create a new book
 app.post("/", async (req, res) => {
   try {
-    if (!req.body.title || !req.body.publishedYear || !req.body.author) {
-      return res.status(400).send({ message: "send all field" });
+    console.log(req.body);
+    const { title, author, publishedYear, coverImageUrl } = req.body;
+
+    if (!title || !author || !publishedYear || !coverImageUrl) {
+      return res.status(400).send({ message: "All fields are required" });
     }
-    const newBook = {
-      title: req.body.title,
-      author: req.body.author,
-      publishedYear: req.body.publishedYear,
-    };
-    const book = await Book.create(newBook);
-    return res.status(201).send(book);
+
+    const newBook = new Book({
+      title,
+      author,
+      publishedYear,
+      coverImageUrl
+    });
+
+    const savedBook = await newBook.save();
+    return res.status(201).send(savedBook);
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 });
 
-//route to get all books
-
+// Route to get all books
 app.get("/", async (req, res) => {
   try {
     const books = await Book.find({});
@@ -31,52 +37,69 @@ app.get("/", async (req, res) => {
     });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 });
 
+// Route to get a single book by ID
 app.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const book = await Book.findById(id);
+
+    if (!book) {
+      return res.status(404).send({ message: "Book not found" });
+    }
+
     return res.status(200).json(book);
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 });
 
-//route to update a book
-
+// Route to update a book by ID
 app.put("/:id", async (req, res) => {
   try {
-    if (!req.body.title || !req.body.publishedYear || !req.body.author) {
-      return res.status(400).send({ message: "send all" });
+    const { title, author, publishedYear, coverImageUrl } = req.body;
+
+    if (!title || !author || !publishedYear || !coverImageUrl) {
+      return res.status(400).send({ message: "All fields are required" });
     }
+
     const { id } = req.params;
-    const result = await Book.findByIdAndUpdate(id, req.body);
-    if (!result) {
-      return res.status(404).send({ message: "not found" });
+    const updatedBook = await Book.findByIdAndUpdate(id, {
+      title,
+      author,
+      publishedYear,
+      coverImageUrl
+    }, { new: true });
+
+    if (!updatedBook) {
+      return res.status(404).send({ message: "Book not found" });
     }
-    return res.status(200).send({ message: "updated successfully" });
+
+    return res.status(200).send(updatedBook);
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 });
 
-//route to delete a book
+// Route to delete a book by ID
 app.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await Book.findByIdAndDelete(id);
-    if (!result) {
-      return res.status(404).send({ message: "not found" });
+    const deletedBook = await Book.findByIdAndDelete(id);
+
+    if (!deletedBook) {
+      return res.status(404).send({ message: "Book not found" });
     }
-    return res.status(200).send({ message: "deleted successfully" });
+
+    return res.status(200).send({ message: "Book deleted successfully" });
   } catch (error) {
     console.log(error);
-    return res.status(500).send({ message: "internal error" });
+    return res.status(500).send({ message: error.message });
   }
 });
 
