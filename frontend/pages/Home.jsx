@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import '../src/index.css';
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
@@ -9,21 +8,8 @@ import { MdOutlineAddBox } from "react-icons/md";
 
 const Home = () => {
   const containerRef = useRef(null);
-  const [cloudinaryRendered, setCloudinaryRendered] = useState(false);
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (window && containerRef.current) {
-      window.cloudinary.galleryWidget({
-        container: containerRef.current,
-        carouselStyle: "none",
-        cloudName: 'dm3rs6xh4',
-        mediaAssets: [{ tag: 'mommy' }],
-        onRendered: () => setCloudinaryRendered(true),
-      }).render();
-    }
-  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -40,45 +26,47 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      <div className="p-4">
-        <div className="flex justify-between items-center">
-          <h1>Books list</h1>
-          <Link to="/books/create">
-            <MdOutlineAddBox className="text-sky-800 text-4xl" />
-          </Link>
-        </div>
-        <div ref={containerRef} className="my-4"></div>
-        {loading ? (
-          <Spinner />
-        ) : (
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th className=" rounded-md max-md:hidden">Book name</th>
-                <th className=" rounded-md">Author</th>
-                <th className=" rounded-md max-md:hidden">Published Year</th>
-                <th className=" rounded-md">Operations</th>
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Books List</h1>
+        <Link to="/books/create" className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+          <MdOutlineAddBox className="text-2xl mr-2" />
+          Add New Book
+        </Link>
+      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border-gray-200 shadow-md rounded-md">
+            <thead className="bg-gray-100">
+              <tr className="text-left">
+                <th className="px-4 py-2">Cover</th>
+                <th className="px-4 py-2">Title</th>
+                <th className="px-4 py-2">Author</th>
+                <th className="px-4 py-2">Published Year</th>
+                <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              {books.map((book, index) => (
+            <tbody className="divide-y divide-gray-200">
+              {books.map((book) => (
                 <tr key={book._id}>
-                  <td className=" rounded-md text-center">{book.title}
-                  <img src={`${book.coverImageUrl}`} alt="" />
+                  <td className="px-4 py-3">
+                    <img src={book.coverImageUrl} alt={book.title} className="h-24 w-auto mx-auto" />
                   </td>
-                  <td className=" rounded-md text-center max-md:hidden">{book.author}</td>
-                  <td className=" rounded-md text-center max-md:hidden">{book.publishedYear}</td>
-                  <td className=" rounded-md text-center">
-                    <div className="flex justify-center gap-x-4">
-                      <Link to={`/books/details/${book._id}`}>
-                        <BsInfoCircle />
+                  <td className="px-4 py-3">{book.title}</td>
+                  <td className="px-4 py-3">{book.author}</td>
+                  <td className="px-4 py-3">{book.publishedYear}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center space-x-4">
+                      <Link to={`/books/details/${book._id}`} className="text-blue-600 hover:text-blue-700">
+                        <BsInfoCircle className="text-xl" />
                       </Link>
-                      <Link to={`/books/edit/${book._id}`}>
-                        <AiOutlineEdit />
+                      <Link to={`/books/edit/${book._id}`} className="text-yellow-600 hover:text-yellow-700">
+                        <AiOutlineEdit className="text-xl" />
                       </Link>
-                      <Link to={`/books/delete/${book._id}`}>
-                        <AiOutlineDelete />
+                      <Link to={`/books/delete/${book._id}`} className="text-red-600 hover:text-red-700">
+                        <AiOutlineDelete className="text-xl" />
                       </Link>
                     </div>
                   </td>
@@ -86,9 +74,9 @@ const Home = () => {
               ))}
             </tbody>
           </table>
-        )}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 };
 
